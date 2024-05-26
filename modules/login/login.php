@@ -3,6 +3,33 @@
 
 $pageTitle = "Вход на сайт";
 
+if (isset($_POST['login'])) {
+  if (trim($_POST['email']) == '') {
+    $errors[] = ['title' => 'Введите email', 'desc' => '<p>Email обязателен для авторизации на сайте</p>'];
+  } else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    $errors[] = ['title' => 'Введите корректный email'];
+  }
+  if (trim($_POST['password']) == '') {
+    $errors[] = ['title' => 'Введите пароль'];
+  }
+
+  if (empty($errors)) {
+    $user = R::findOne('users', 'email = ?', array($_POST['email']));
+
+    if ($user) {
+
+      if (password_verify($_POST['password'], $user->password)) {
+        $success[] = ['title' => 'Вы авторизованы'];
+      } else {
+        $errors[] = ['title' => 'Неверный пароль'];
+      }
+    } else {
+      $errors[] = ['title' => 'Неверный email'];
+    }
+  }
+}
+
+
 ob_start();
 
 include ROOT . 'templates/login/form-login.tpl';

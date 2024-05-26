@@ -13,5 +13,5 @@
   <div class="authorization-form__button">
     <button name="register" value="register" class="primary-button" type="submit">Зарегистрироваться</button>
   </div>
-  <div class="authorization-form__links"><a>Вход на сайт</a></div>
+  <div class="authorization-form__links"><a href="<?php echo HOST; ?>login">Вход на сайт</a></div>
 </form>
