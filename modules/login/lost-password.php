@@ -25,7 +25,7 @@ if (isset($_POST['lost-password'])) {
 
       $user->recovery_code = $recovery_code;
       R::store($user);
-
+  
       $recovery_message = "<p>Код сброса пароля: <b>$recovery_code</b></p>";
       $recovery_message .= "<p>Для сброса пароля перейдите по ссылке ниже и установите новый пароль:</p>";
 
