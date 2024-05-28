@@ -3,6 +3,33 @@
 
 $pageTitle = "Установить новый пароль";
 
+if (!empty($_GET['email']) && !empty($_GET['code'])) {
+
+  $user = R::findOne('users', 'email = ?', array($_GET['email']));
+
+  if (!$user) {
+    header('Location: ' . HOST . 'lost-password');
+  }
+} else if (!empty($_POST['set-new-password'])) {
+  $user = R::findOne('users', 'email = ?', array($_POST['email']));
+
+  if ($user) {
+    if ($user->recovery_code === $_POST['resetCode'] && $user->recovery_code != '' && $user->recovery_code != NULL) {
+      $user->password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+      $user->recovery_code = '';
+      R::store($user);
+
+      $success[] = ['title' => 'Пароль успешно обновлен!'];
+      $newPasswordReady = true;
+    } else {
+      $errors[] = ['title' => 'Неверный код'];
+    }
+  }
+} else {
+  header('Location: ' . HOST . 'lost-password');
+  die();
+}
+
 
 ob_start();
 
