@@ -9,6 +9,7 @@
   <meta name="description" />
   <link rel="stylesheet" href="<?php echo HOST; ?>static/css/main.css" />
   <link rel="stylesheet" href="<?php echo HOST; ?>static/css/custom.css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Playfair+Display:400,700&amp;display=swap&amp;subset=cyrillic-ext" rel="stylesheet" />
 </head>
 
-<body class="authorization-page">
+<body <?php echo isset($pageClass) ? "class=\"authorization-page\"" : '' ?>>

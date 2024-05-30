@@ -1,9 +1,8 @@
 <?php
 
 
-use Couchbase\User;
-
 $pageTitle = "Регистрация на сайте";
+$pageClass = "authorization-page";
 
 if (isset($_POST['register'])) {
   if (trim($_POST['email']) == '') {
@@ -31,6 +30,14 @@ if (isset($_POST['register'])) {
     $result = R::store($user);
     if (is_int($result)) {
       $success[] = ['title' => 'Вы успешно зарегистрировались'];
+
+      // Автологин пользователя
+      $_SESSION['logged_user'] = $user;
+      $_SESSION['login'] = 1;
+      $_SESSION['role'] = $user->role;
+
+      header('Location: ' . HOST . 'profile-edit');
+      exit();
     } else {
       $errors[] = ['title' => 'Что то пошло не так...'];
     }

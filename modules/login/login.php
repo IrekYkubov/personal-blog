@@ -2,6 +2,7 @@
 
 
 $pageTitle = "Вход на сайт";
+$pageClass = "authorization-page";
 
 if (isset($_POST['login'])) {
   if (trim($_POST['email']) == '') {

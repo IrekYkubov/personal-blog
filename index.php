@@ -3,7 +3,7 @@ require_once "config.php";
 require_once "db.php";
 $errors = array();
 $success = array();
-
+session_start();
 // router
 $uri = $_SERVER['REQUEST_URI'];
 $uri = rtrim($uri, '/');

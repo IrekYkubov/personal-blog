@@ -2,6 +2,7 @@
 
 
 $pageTitle = "Восстоновить пароль";
+$pageClass = "authorization-page";
 
 if (isset($_POST['lost-password'])) {
 
