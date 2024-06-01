@@ -11,7 +11,11 @@ $uri = filter_var($uri, FILTER_SANITIZE_URL);
 $uri = substr($uri, 1);
 $uri = explode('?', $uri);
 
-switch ($uri[0]) {
+$uriGet = isset($uri[1]) ? $uri[1] : NULL;
+$uriArray = explode('/', $uri[0]);
+$uriModule = $uriArray[0];
+
+switch ($uriModule) {
   case '':
     require ROOT . "modules/main/index.php";
     break;
@@ -39,7 +43,7 @@ switch ($uri[0]) {
     break;
 
   case 'profile':
-    require ROOT . "modules/profile/index.php";
+    require ROOT . "modules/profile/profile.php";
     break;
 
   case 'profile-edit':

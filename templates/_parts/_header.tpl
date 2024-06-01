@@ -1,3 +1,6 @@
+<!-- sticky-footer-content -->
+<div class="sticky-footer-content">
+
 <?php include ROOT . 'templates/_parts/_admin-panel.tpl'; ?>
 
 <header class="section-header section-header--inner">

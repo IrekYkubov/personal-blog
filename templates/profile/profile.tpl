@@ -1,5 +1,30 @@
 <main class="page-profile">
-  <div class="section">
+
+  <?php if (isset($userNotLoggedIn)): ?>
+
+    <div class="section">
+      <div class="container">
+        <div class="section__title">
+          <h2 class="heading mb-35">Профиль пользователя</h2>
+          <p>Для просмотра профиля, <a href="<?=HOST?>registration">зарегестрируйтесь</a> или <a href="<?=HOST?>login">войдите</a> на сайт</p>
+        </div>
+      </div>
+    </div>
+
+  <?php elseif ($user->id === 0): ?>
+
+    <div class="section">
+      <div class="container">
+        <div class="section__title">
+          <h2 class="heading mb-35">Такого пользователя нет</h2>
+          <p>Вернуться на <a href="<?=HOST?>">главную страницу</a>.</p>
+        </div>
+      </div>
+    </div>
+
+  <?php else: ?>
+
+    <div class="section">
     <div class="container">
       <div class="section__title">
         <h2 class="heading">Профиль пользователя </h2>
@@ -13,23 +38,32 @@
             <div class="definition-list mb-20">
               <dl class="definition">
                 <dt class="definition__term">имя и фамилия</dt>
-                <dd class="definition__description"> Сергей Петров</dd>
-              </dl>
-              <dl class="definition">
-                <dt class="definition__term">email</dt>
-                <dd class="definition__description"> info@mail.com</dd>
+                <dd class="definition__description"> <?=$user->name?> <?=$user->surname?></dd>
               </dl>
               <dl class="definition">
                 <dt class="definition__term">Страна, город</dt>
-                <dd class="definition__description"> Россия, Екатеринбург</dd>
+                <dd class="definition__description"> <?=$user->country?>, <?=$user->city?></dd>
               </dl>
-            </div><a class="secondary-button" href="#">Редактировать</a>
+            </div>
+            <?php
+              if (isset($_SESSION['login']) && $_SESSION['login'] === 1
+                 && (
+                    $_SESSION['logged_user']['id'] == $user->id
+                    || $_SESSION['logged_user']['role'] === 'admin'
+                 )
+              ) :
+            ?>
+              <?php $btnLink = $_SESSION['logged_user']['role'] === 'admin' ? '/' . $user->id : ''; ?>
+              <a class="secondary-button" href="<?= HOST . 'profile-edit' . $btnLink?>">Редактировать</a>
+
+            <?php endif; ?>
+
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="section bg-grey">
+    <div class="section bg-grey">
     <div class="container">
       <div class="section__title">
         <h2 class="heading">Комментарии пользователя </h2>
@@ -87,4 +121,7 @@
       </div>
     </div>
   </div>
+
+  <?php endif ?>
+
 </main>

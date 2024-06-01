@@ -1,3 +1,6 @@
+</div>
+<!-- //sticky-footer-content -->
+
 <footer class="section-footer">
   <div class="container">
     <div class="row">

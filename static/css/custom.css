@@ -1,0 +1,9 @@
+html {
+    height: 100%;
+}
+
+.sticky-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

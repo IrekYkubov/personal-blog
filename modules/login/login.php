@@ -20,7 +20,14 @@ if (isset($_POST['login'])) {
     if ($user) {
 
       if (password_verify($_POST['password'], $user->password)) {
-        $success[] = ['title' => 'Вы авторизованы'];
+        // $success[] = ['title' => 'Вы авторизованы'];
+        // Автологин пользователя
+        $_SESSION['logged_user'] = $user;
+        $_SESSION['login'] = 1;
+        $_SESSION['role'] = $user->role;
+
+        header('Location: ' . HOST . 'profile');
+        exit();
       } else {
         $errors[] = ['title' => 'Неверный пароль'];
       }

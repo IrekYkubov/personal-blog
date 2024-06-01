@@ -1,3 +1,8 @@
 <?php
 
-echo "<h1>logout.php</h1>";
+unset($_SESSION['logged_user']);
+unset($_SESSION['login']);
+unset($_SESSION['role']);
+session_start();
+setcookie(session_name(), '', time() - 60, "/");
+header("location: " . HOST);
