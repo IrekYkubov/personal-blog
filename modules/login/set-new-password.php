@@ -20,10 +20,10 @@ if (!empty($_GET['email']) && !empty($_GET['code'])) {
       $user->recovery_code = '';
       R::store($user);
 
-      $success[] = ['title' => 'Пароль успешно обновлен!'];
+      $_SESSION['success'][] = ['title' => 'Пароль успешно обновлен!'];
       $newPasswordReady = true;
     } else {
-      $errors[] = ['title' => 'Неверный код'];
+      $_SESSION['errors'][] = ['title' => 'Неверный код'];
     }
   }
 } else {

@@ -6,21 +6,21 @@ $pageClass = "authorization-page";
 
 if (isset($_POST['login'])) {
   if (trim($_POST['email']) == '') {
-    $errors[] = ['title' => 'Введите email', 'desc' => '<p>Email обязателен для авторизации на сайте</p>'];
+    $_SESSION['errors'][] = ['title' => 'Введите email', 'desc' => '<p>Email обязателен для авторизации на сайте</p>'];
   } else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-    $errors[] = ['title' => 'Введите корректный email'];
+    $_SESSION['errors'][] = ['title' => 'Введите корректный email'];
   }
   if (trim($_POST['password']) == '') {
-    $errors[] = ['title' => 'Введите пароль'];
+    $_SESSION['errors'][] = ['title' => 'Введите пароль'];
   }
 
-  if (empty($errors)) {
+  if (empty($_SESSION['errors'])) {
     $user = R::findOne('users', 'email = ?', array($_POST['email']));
 
     if ($user) {
 
       if (password_verify($_POST['password'], $user->password)) {
-        // $success[] = ['title' => 'Вы авторизованы'];
+        $_SESSION['success'][] = ['title' => 'Рады видеть Вас снова'];
         // Автологин пользователя
         $_SESSION['logged_user'] = $user;
         $_SESSION['login'] = 1;
@@ -29,10 +29,10 @@ if (isset($_POST['login'])) {
         header('Location: ' . HOST . 'profile');
         exit();
       } else {
-        $errors[] = ['title' => 'Неверный пароль'];
+        $_SESSION['errors'][] = ['title' => 'Неверный пароль'];
       }
     } else {
-      $errors[] = ['title' => 'Неверный email'];
+      $_SESSION['errors'][] = ['title' => 'Неверный email'];
     }
   }
 }

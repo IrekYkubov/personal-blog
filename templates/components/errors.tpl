@@ -1,6 +1,6 @@
 <?php
-if (!empty($errors)):
-  foreach ($errors as $error):
+if (!empty($_SESSION['errors'])):
+  foreach ($_SESSION['errors'] as $error):
     if (count($error) == 2): ?>
       <div class="notifications notifications__title--with-message mb-3">
         <div class="notifications__title notifications__title--error"><?php echo $error['title']; ?></div>
@@ -13,6 +13,7 @@ if (!empty($errors)):
         <div class="notifications__title notifications__title--error"><?php echo $error['title']; ?></div>
       </div>
     <?php endif;
+    $_SESSION['errors'] = array();
   endforeach;
 endif;
 ?>
