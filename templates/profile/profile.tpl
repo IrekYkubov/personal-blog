@@ -42,10 +42,13 @@
           <!-- Профиль пуст -->
           <div class="row justify-content-center">
             <div class="col-md-8">
-              <div class="enter-or-reg">
+              <div class="enter-or-reg flex-column flex-column-elements-margin">
                 <div class="enter-or-reg__text">
                   😐 Пустой профиль
                 </div>
+                <?php
+                  include ROOT . "templates/profile/_parts/profile-edit-button.tpl";
+                ?>
               </div>
             </div>
           </div>
@@ -53,7 +56,13 @@
         <?php else : ?>
           <div class="row justify-content-center">
             <div class="col-md-2">
-              <div class="avatar-big"><img src="<?=HOST ?>static/img/section-about-me/img-01.jpg" alt="Аватарка" /></div>
+              <div class="avatar-big">
+                <?php if (!empty($user->avatar)) : ?>
+                  <img src="<?=HOST ?>usercontent/avatars/<?=$user->avatar?>" alt="Аватарка" />
+                <?php else : ?>
+                  <img src="<?=HOST ?>usercontent/avatars/no-avatar.png" alt="Аватарка" />
+                <?php endif; ?>
+              </div>
             </div>
             <div class="col-md-4">
               <div class="definition-list mb-20">
@@ -93,23 +102,7 @@
                 <?php endif; ?>
               </div>
               <?php
-                if (isset($_SESSION['login']) && $_SESSION['login'] === 1) {
-                  // Если админ
-                  if ($_SESSION['logged_user']['role'] === 'admin' ) {
-                    //  Админ открыл свой профиль
-                    if ($_SESSION['logged_user']['id'] === $user->id ) {
-                      echo "<a class=\"secondary-button\" href=\"" . HOST ."profile-edit\">Редактировать</a>";
-                    } else {
-                      echo "<a class=\"secondary-button\" href=\"" . HOST . "profile-edit/". $user->id ."\">Редактировать</a>";
-                    }
-                    // Если Юзер
-                  } else if($_SESSION['logged_user']['role'] === 'user' ) {
-                    // Юзер открыл свой профиль
-                    if ($_SESSION['logged_user']['id'] === $user->id ) {
-                      echo "<a class=\"secondary-button\" href=\"" . HOST ."profile-edit\">Редактировать</a>";
-                    }
-                  }
-                }
+                include ROOT . "templates/profile/_parts/profile-edit-button.tpl";
               ?>
 
             </div>

@@ -7,3 +7,14 @@ html {
     flex-direction: column;
     justify-content: space-between;
 }
+
+.enter-or-reg {
+    height: auto;
+    min-height: 180px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.flex-column-elements-margin > * + * {
+    margin-top: 20px;
+}
