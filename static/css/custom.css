@@ -18,3 +18,37 @@ html {
 .flex-column-elements-margin > * + * {
     margin-top: 20px;
 }
+
+.main-page {
+    padding-bottom: 0 !important;
+}
+
+.main-page__posts-cards {
+    padding-bottom: 90px;
+}
+
+.section-header {
+    background: #eaeff2;
+}
+
+.main-page .section-header {
+    background: #fff;
+}
+
+.authorization-page__header {
+    text-align: center;
+}
+
+.authorization-page__header-title,
+.authorization-page__header-subtitle {
+    opacity: inherit;
+}
+
+.authorization-page__header a {
+    transition: opacity 0.1s ease-in;
+}
+
+.authorization-page__header a:hover {
+    text-decoration: none;
+    opacity: 0.7;
+}
