@@ -61,10 +61,10 @@ function resize_and_crop($source_image_path, $thumbnail_image_path, $result_widt
         0,
         0,
         0,
-        $temp_width,
-        $temp_height,
-        $source_width,
-        $source_height
+        intval ($temp_width),
+        intval ($temp_height),
+        intval ($source_width),
+        intval ($source_height)
     );
 
     /*
@@ -79,10 +79,10 @@ function resize_and_crop($source_image_path, $thumbnail_image_path, $result_widt
         $temp_gdim,
         0,
         0,
-        $x0,
-        $y0,
-        $result_width,
-        $result_height
+        intval ($x0),
+        intval ($y0),
+        intval ($result_width),
+        intval ($result_height)
     );
 
     /*
