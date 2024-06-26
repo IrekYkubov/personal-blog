@@ -4,7 +4,7 @@
     <div class="admin-panel__block-list">
 
       <?php if ($_SESSION['role'] === 'admin') : ?>
-      <a class="admin-panel__link" href="#">
+      <a class="admin-panel__link" href="<?=HOST?>admin">
         <img src="<?= HOST ?>static/img/admin-panel/target.svg" alt="Перейти в админ панель">
         <div class="span">Панель управления</div>
       </a>

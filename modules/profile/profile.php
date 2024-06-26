@@ -4,10 +4,10 @@ $pageTitle = "Профиль пользователя";
 $pageClass = "profile-page";
 
 // Проверка есть ли параметр ID
-if (isset($uriArray[1])) {
+if (isset($uriGet)) {
   // Id передан
   // Загружаем данные юзера
-  $user = R::load('users', $uriArray[1]);
+  $user = R::load('users', $uriGet);
 } else {
 
   // Проверка авторизован ли пользователь

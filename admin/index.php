@@ -3,10 +3,17 @@
 require_once "./../config.php";
 require_once "./../db.php";
 require_once ROOT . "libs/resize-and-crop.php";
+require_once ROOT . "libs/functions.php";
 
 $_SESSION['errors'] = array();
 $_SESSION['success'] = array();
 session_start();
+
+// Проверка на права доступа
+if ( !(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ) {
+  header('Location: ' . HOST . 'login');
+  exit();
+}
 
 /* ..........................................
 
@@ -14,20 +21,7 @@ session_start();
 
 ............................................. */
 
-// Обработка запроса
-$uri = $_SERVER['REQUEST_URI'];
-
-$uriArr = explode('?', $uri); // Разбиваем запрос по символу '?' чтобы отсечь GET запрос
-$uri = $uriArr[0]; // /admin/blog?id=15 => /admin/blog
-$uri = rtrim($uri, "/"); // Обрезаем слеш в конце /admin/blog/ => /admin/blog
-$uri = substr($uri, 1); // Обрезаем слеш в начале /admin/blog => admin/blog
-$uri = filter_var($uri, FILTER_SANITIZE_URL);
-
-$moduleNameArr = explode('/', $uri);
-// Разбиваем строку запроса по символу / и получаем массив
-// admin/blog => ['admin', 'blog']
-
-$uriModule = $moduleNameArr[1];  // Достаем имя модуля который надо запустить admin/blog => blog
+$uriModule = getModuleNameForAdmin();
 
 // Роутер
 switch ($uriModule) {

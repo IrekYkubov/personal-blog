@@ -139,8 +139,8 @@ if ( isset($_SESSION['login']) && $_SESSION['login'] === 1) {
   } else if ($_SESSION['logged_user']['role'] === 'admin' ) {
     // Это Администратор сайта
 
-    if (isset($uriArray[1])) {
-      $user = R::load('users', intval($uriArray[1]));
+    if (isset($uriGet)) {
+      $user = R::load('users', intval($uriGet));
       updateProfile($user);
     } else {
       $user = R::load('users', $_SESSION['logged_user']['id']);
