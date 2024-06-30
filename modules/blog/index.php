@@ -11,7 +11,11 @@ if (isset($uriGet)) {
   ob_end_clean();
 
 } else {
-  $posts = R::find('posts', 'ORDER BY id DESC');
+  $pagination = pagination(6, 'posts');
+
+  // Делаем запрос в БД для получения постов
+  $posts = R::find('posts', "ORDER BY id DESC {$pagination['sql_page_limit']}");
+
   ob_start();
   include ROOT . 'templates/blog/all-posts.tpl';
   $content = ob_get_contents();
